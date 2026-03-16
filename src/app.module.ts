@@ -4,9 +4,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import configuration from './config/configuration';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TimezoneModule } from './common/timezone/timezone.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { EventTypesModule } from './event-types/event-types.module';
+import { AvailabilityModule } from './availability/availability.module';
+import { MeetingsModule } from './meetings/meetings.module';
+import { IntegrationsModule } from './integrations/integrations.module';
+import { PublicModule } from './public/public.module';
 import { User } from './users/entities/user.entity';
+import { EventType } from './event-types/entities/event-type.entity';
+import { Availability } from './availability/entities/availability.entity';
+import { Meeting } from './meetings/entities/meeting.entity';
+import { Integration } from './integrations/entities/integration.entity';
 
 @Module({
   imports: [
@@ -15,7 +25,7 @@ import { User } from './users/entities/user.entity';
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => {
         const useSqlite = config.get<boolean>('database.useSqlite');
-        const entities = [User];
+        const entities = [User, EventType, Availability, Meeting, Integration];
         const isVercel = process.env.VERCEL === '1';
         const synchronize = useSqlite ? true : !isVercel;
 
@@ -60,8 +70,14 @@ import { User } from './users/entities/user.entity';
       },
       inject: [ConfigService],
     }),
+    TimezoneModule,
     UsersModule,
     AuthModule,
+    EventTypesModule,
+    AvailabilityModule,
+    MeetingsModule,
+    IntegrationsModule,
+    PublicModule,
   ],
   controllers: [AppController],
   providers: [AppService],

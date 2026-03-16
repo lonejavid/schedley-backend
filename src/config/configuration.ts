@@ -22,6 +22,9 @@ export default () => ({
     callbackUrl:
       process.env.GOOGLE_CALLBACK_URL ||
       'http://localhost:3000/api/auth/google/callback',
+    calendarCallbackUrl:
+      process.env.GOOGLE_CALENDAR_CALLBACK_URL ||
+      'http://localhost:3000/api/integration/google/callback',
   },
   frontend: {
     origin: process.env.FRONTEND_ORIGIN || 'http://localhost:3000',

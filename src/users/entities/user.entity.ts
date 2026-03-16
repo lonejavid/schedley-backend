@@ -2,10 +2,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { Availability } from '../../availability/entities/availability.entity';
+import { EventType } from '../../event-types/entities/event-type.entity';
+import { Integration } from '../../integrations/entities/integration.entity';
 
 @Entity('users')
 export class User {
@@ -42,4 +47,13 @@ export class User {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @OneToOne(() => Availability, (a) => a.user)
+  availability?: Availability;
+
+  @OneToMany(() => EventType, (e) => e.user)
+  eventTypes?: EventType[];
+
+  @OneToMany(() => Integration, (i) => i.user)
+  integrations?: Integration[];
 }
