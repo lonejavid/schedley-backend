@@ -2,14 +2,17 @@ export default () => ({
   port: parseInt(process.env.PORT || '3000', 10),
   serverOrigin: process.env.SERVER_ORIGIN || 'http://localhost:3000',
   database: {
+    // Use SQLite by default for local dev; set USE_SQLITE=false to use PostgreSQL (e.g. Supabase)
     useSqlite: process.env.USE_SQLITE !== 'false',
     sqlitePath: process.env.DATABASE_SQLITE_PATH || 'schedley.sqlite',
+    // PostgreSQL: use DATABASE_URL (Supabase/Neon/etc.) or individual vars
     url: process.env.DATABASE_URL,
     host: process.env.DB_HOST || 'localhost',
     port: parseInt(process.env.DB_PORT || '5432', 10),
     username: process.env.DB_USERNAME || 'postgres',
     password: process.env.DB_PASSWORD || 'postgres',
     database: process.env.DB_DATABASE || 'schedley',
+    // Set to 'true' for Supabase / hosted Postgres (SSL required)
     ssl: process.env.DATABASE_SSL || 'false',
   },
   jwt: {

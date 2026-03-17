@@ -1,3 +1,4 @@
+import './dotenv-loader';
 import { mkdirSync } from 'fs';
 import { join } from 'path';
 import { ValidationPipe } from '@nestjs/common';

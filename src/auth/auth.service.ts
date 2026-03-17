@@ -7,6 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
+import { IntegrationsService } from '../integrations/integrations.service';
 import { User } from '../users/entities/user.entity';
 
 @Injectable()
@@ -15,6 +16,7 @@ export class AuthService {
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
     private readonly config: ConfigService,
+    private readonly integrationsService: IntegrationsService,
   ) {}
 
   async validateUserByEmail(

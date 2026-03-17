@@ -69,6 +69,7 @@ export class PublicController {
     private readonly meetingsService: MeetingsService,
   ) {}
 
+  /** GET /api/event/public/:username - list public events by username (frontend expects this) */
   @Get('event/public/:username')
   async getPublicEventsByUsername(@Param('username') username: string) {
     const { user, events } =
@@ -152,6 +153,7 @@ export class PublicController {
     };
   }
 
+  /** POST /api/contact – contact form submission (no auth). Frontend: Contact Us page. */
   @Post('contact')
   async submitContact(@Body() dto: ContactDto) {
     return {

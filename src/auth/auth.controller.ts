@@ -80,6 +80,7 @@ export class AuthController {
     if (payload.expiresAt != null) {
       params.set('expiresAt', String(payload.expiresAt));
     }
+    // Use hash so token is never in the query string (not sent to server, easy to strip in frontend)
     res.redirect(`${frontendOrigin}/oauth-success#${params.toString()}`);
   }
 
